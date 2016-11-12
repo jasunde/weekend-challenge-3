@@ -3,8 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title>Calculator</title>
+    <script type="text/javascript" src="../vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="../scripts/client.js"></script>
   </head>
   <body>
-    <h1>It's working.</h1>
+    <h1>Calculator</h1>
+    <form id="calculator">
+      <input type="number" name="x" id="x">
+      <input type="number" name="y" id="y">
+      <button id="add">+</button>
+      <button id="subtract">-</button>
+      <button id="multiply">*</button>
+      <button id="divide">/</button>
+      <button type="reset">Clear</button>
+    </form>
+    <div id="result"></div>
   </body>
 </html>

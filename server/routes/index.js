@@ -1,6 +1,6 @@
 var path = require('path')
-console.log(process.cwd());
 
-module.exports = function(req, res) {
-  res.sendFile(path.resolve('./public/views/index.html'))
+function index(req, res) {
+  res.sendFile(path.resolve(__dirname, '../../public/views/index.html'))
 }
+module.exports = index;
