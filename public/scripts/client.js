@@ -1,23 +1,42 @@
 $(document).ready(function () {
-  // Handle calculator button clicks
-  $('#calculator').on('click', 'button', function (event) {
+  $x = $('#x');
+  $y = $('#y');
+
+  // Handle equal button click
+  $(':submit').on('click', function (event) {
     // if button is type=reset, empty form and result
-    if(this.type === 'reset') {
-      $('#result').empty();
-    } else {
-      calculate(this, event);
+    calculate(event);
+  });
+
+  // Handle operation selector buttons
+  $('.operation').on('click', function () {
+    $('.operation').removeClass('active');
+    $(this).addClass('active');
+  });
+
+  // Handle number buttons
+  $('.number').on('click', function() {
+    if($x.val() === '') {
+      $x.val($(this).val());
+    } else if($y.val() === '') {
+      $y.val($(this).val());
     }
   });
+
+  // Handle clear button
+  $(':reset').on('click', function () {
+    $('#result').empty();
+  })
 });
 
 // Send the object to calculate via ajax
-function calculate(button, event) {
+function calculate(event) {
   event.preventDefault();
 
   var data = {
-    x: $('#x').val(),
-    y: $('#y').val(),
-    type: button.id
+    x: $x.val(),
+    y: $y.val(),
+    type: $('.operation.active').attr('id')
   };
 
   $.ajax({
