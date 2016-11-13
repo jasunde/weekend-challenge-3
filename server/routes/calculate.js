@@ -12,8 +12,8 @@ router.get('/', function (req, res) {
 })
 
 function evaluate({x: x, y: y, type: type}) {
-  x = parseInt(x)
-  y = parseInt(y)
+  x = parseFloat(x)
+  y = parseFloat(y)
 
   switch(type) {
     case 'add':
