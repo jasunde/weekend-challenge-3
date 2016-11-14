@@ -14,11 +14,6 @@ $(document).ready(function () {
 
   $('#display').val('0');
 
-  // appendNumbers();
-  // appendOperations();
-  // appendButton('', 'equals', '=', 'button');
-  // appendButton('', '', 'Clear', 'reset');
-
   // Handle equal button click
   $('#calculator').on('click', '.equals', equalsHandler);
 
@@ -211,21 +206,7 @@ $(document).ready(function () {
         } else {
           if(data.z.length) console.log('should be no z');
         }
-
-        // if(data.y.length) {
-        //   data.x = data.y;
-        // }
         data.y = val.toString();
-        // // When z exists
-        // if(data.z.length > 0) {
-        //   data.y = appendDigit(data.y, val);
-        //
-        // // When z does not exist
-        // } else {
-        //   data.z = data.x;
-        //   data.x =data.y;
-        //   data.y = val
-        // }
 
         // When trailing number
       } else {
@@ -304,7 +285,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: 'POST',
-      url: '/calculate',
+      url: '/calculate/' + data.type,
       data: data,
       success: function() {
         getResult(fn);

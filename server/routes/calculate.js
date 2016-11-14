@@ -2,7 +2,23 @@ var express = require('express')
 var router = express.Router()
 var result = {value: 0};
 
-router.post('/', function (req, res) {
+router.post('/add', function (req, res) {
+  result.value = evaluate(req.body)
+  res.sendStatus(201)
+})
+
+router.post('/subtract', function (req, res) {
+  result.value = evaluate(req.body)
+  res.sendStatus(201)
+})
+
+router.post('/multiply', function (req, res) {
+  result.value = evaluate(req.body)
+  res.sendStatus(201)
+})
+
+
+router.post('/divide', function (req, res) {
   result.value = evaluate(req.body)
   res.sendStatus(201)
 })
