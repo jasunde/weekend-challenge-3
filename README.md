@@ -1,8 +1,5 @@
 # Weekend Challenge 3
 
-Description
-
-## Weekend Challenge 3
 Welcome to your third weekend challenge!
 We are going to be building a calculator application using jQuery, Node, and Express, all hosted on Heroku!
 
