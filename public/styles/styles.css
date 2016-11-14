@@ -48,6 +48,11 @@ button {
   font-size: 3.5em;
 }
 
+.operation.active {
+  border-color: #999;
+  border-width: 4px;
+}
+
 .clear,
 .top {
   background-color: rgb(214,214,214);
