@@ -1,0 +1,58 @@
+#calculator {
+  margin-top: 75px;
+}
+
+button {
+  height: 100px;
+}
+
+.btn {
+  font-weight: 300;
+}
+
+.container {
+  width: 400px;
+}
+
+.form-control {
+  background-color: rgb(41,41,46);
+  color: white;
+  font-size: 6em;
+  font-weight: 100;
+  height: 170px;
+  margin-bottom: -30px;
+  padding-right: 26px;
+  text-align: right;
+}
+
+.number,
+.number {
+  background-color: rgb(224,224,224);
+  font-size: 3.2em;
+}
+
+.operation,
+.operation:active,
+.operation.active,
+.operation.active:focus,
+.operation.active:hover,
+.operation:focus,
+.operation:hover,
+.equals,
+.equals:focus,
+.equals:hover,
+.equals:active,
+.equals.active {
+  color: white;
+  background-color: rgb(255,145,0);
+  font-size: 3.5em;
+}
+
+.clear,
+.top {
+  background-color: rgb(214,214,214);
+}
+
+.clear {
+  font-size: 2.5em;
+}
