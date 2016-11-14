@@ -12,23 +12,15 @@ $(document).ready(function () {
     trailing: 'number'
   };
 
-  appendNumbers();
-  appendOperations();
-  appendButton('', 'equals', '=', 'button');
-  appendButton('', '', 'Clear', 'reset');
+  $('#display').val('0');
+
+  // appendNumbers();
+  // appendOperations();
+  // appendButton('', 'equals', '=', 'button');
+  // appendButton('', '', 'Clear', 'reset');
 
   // Handle equal button click
-  $('#calculator').on('click', '.equals', function () {
-    // if button is type=reset, empty form and result
-    data.numClicked = false;
-    data.opClicked = false;
-
-    // When two operators and operator trailing
-    if(data.trailing === 'operator' && data.type0.length) {
-      
-    }
-    calculate();
-  });
+  $('#calculator').on('click', '.equals', equalsHandler);
 
   // Handle operation selector buttons
   $('#calculator').on('click', '.operation', operatorHandler);
@@ -37,7 +29,8 @@ $(document).ready(function () {
   $('#calculator').on('click', '.number', numberHandler);
 
   // Handle clear button
-  $(':reset').on('click', function () {
+  $(':reset').on('click', function (event) {
+    event.preventDefault();
     data = {
       x: '0',
       y: '',
@@ -48,8 +41,58 @@ $(document).ready(function () {
       opClicked: false,
       trailing: 'number'
     };
-    $('#result').empty();
+    console.log($('#display'));
+    $('.active').removeClass('active');
+    $('#display').val('0');
   });
+
+  function equalsHandler() {
+    // if button is type=reset, empty form and result
+    data.numClicked = false;
+    data.opClicked = false;
+
+    // Operator is trailing
+    if(data.trailing === 'operator') {
+      // Two operators
+      if(data.type0.length) {
+        data.x = data.z;
+        data.z = '';
+        calculate(function () {
+          data.type = data.type0;
+          data.type0 = '';
+          calculate();
+        });
+
+      // One operator
+      } else {
+        calculate();
+      }
+
+    // Number is trailing
+    } else {
+      // Three numbers
+      if(data.z.length) {
+        calculate(function () {
+          var temp = data.y;
+          data.y = data.x;
+          data.x = data.z;
+          data.z = '';
+          var tempType = data.type;
+          data.type = data.type0;
+          data.type0 = '';
+          calculate(function () {
+            data.y = temp;
+            data.type = tempType;
+          });
+        });
+
+      // Two numbers
+      } else {
+        calculate();
+      }
+
+    }
+  }
 
   function operatorHandler() {
     console.log('start operation handler');
@@ -58,7 +101,11 @@ $(document).ready(function () {
     // First Time operator is clicked
     if(!data.opClicked) {
       data.opClicked = true;
-      data.y = data.x;
+      if(data.numClicked) {
+        // data.y = val.toString();
+      } else {
+        data.y = data.x;
+      }
       data.type = operator;
 
       // Succeeding times operator is clicked
@@ -147,9 +194,9 @@ $(document).ready(function () {
       if(data.y.length) {
         data.x = data.y;
       } else {
-        data.x = val;
+        data.x = appendDigit(data.x, val);
       }
-      data.y = val;
+      data.y = val.toString();
       data.numClicked = true;
 
       // Succeeding times number is clicked
@@ -165,7 +212,10 @@ $(document).ready(function () {
           if(data.z.length) console.log('should be no z');
         }
 
-        data.y = val;
+        // if(data.y.length) {
+        //   data.x = data.y;
+        // }
+        data.y = val.toString();
         // // When z exists
         // if(data.z.length > 0) {
         //   data.y = appendDigit(data.y, val);
@@ -180,9 +230,15 @@ $(document).ready(function () {
         // When trailing number
       } else {
         data.y = appendDigit(data.y, val);
+        if(!data.opClicked){
+          data.x = data.y;
+        }
       }
     }
 
+    if(data.y === '.') {
+      data.y = '0.';
+    }
     $display.val(data.y);
     data.trailing = 'number';
     console.log(data.trailing);
@@ -190,8 +246,19 @@ $(document).ready(function () {
   }
 
   function appendDigit(val, digit) {
+    if(val === '0') {
+      val = '';
+    }
+    val = val.toString();
+    digit = digit.toString();
     if(digit !== '.' || !val.includes('.')) {
       val += digit;
+    }
+    if(parseInt(val) === 0 && val.indexOf('.') < 0) {
+        val = '0';
+    }
+    if(val === '.') {
+      val = '0.'
     }
     return val;
   }
