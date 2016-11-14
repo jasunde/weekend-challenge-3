@@ -3,17 +3,53 @@
   <head>
     <meta charset="utf-8">
     <title>Calculator</title>
+    <link rel="stylesheet" href="../vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/styles.css">
     <script type="text/javascript" src="../vendor/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/client.js"></script>
   </head>
   <body>
-    <h1>Calculator</h1>
+    <!-- <h1>Calculator</h1> -->
+    <div class="container">
     <form id="calculator">
 
       <!-- Number inputs -->
-      <input type="text" name="display" id="display">
+      <div class="row">
+        <input type="text" name="display" id="display" class="form-control">
+      </div>
+
+      <div class="row top">
+        <button class="btn btn-default col-xs-3 clear" type="reset">C</button>
+        <button class="btn btn-default col-xs-push-6 col-xs-3 operation" type="button" data-val="divide">&divide;</button>
+      </div>
+      <div class="row">
+        <button class="btn btn-default col-xs-3 number" type="button" data-val="7">7</button>
+        <button class="btn btn-default col-xs-3 number" type="button" data-val="8">8</button>
+        <button class="btn btn-default col-xs-3 number" type="button" data-val="9">9</button>
+        <button class="btn btn-default col-xs-3 operation" data-val="multiply" type="button">&times;</button>
+      </div>
+      <div class="row">
+        <button class="btn btn-default col-xs-3 number" type="button" data-val="4">4</button>
+        <button class="btn btn-default col-xs-3 number" type="button" data-val="5">5</button>
+        <button class="btn btn-default col-xs-3 number" type="button" data-val="6">6</button>
+        <button class="btn btn-default col-xs-3 operation" data-val="subtract" type="button">&#8722;</button>
+      </div>
+      <div class="row">
+        <button class="btn btn-default col-xs-3 number" type="button" data-val="1">1</button>
+        <button class="btn btn-default col-xs-3 number" type="button" data-val="2">2</button>
+        <button class="btn btn-default col-xs-3 number" type="button" data-val="3">3</button>
+        <button class="btn btn-default col-xs-3 operation" data-val="add" type="button">+</button>
+      </div>
+      <div class="row">
+        <button class="btn btn-default col-xs-6 number" type="button" data-val="0">0</button>
+        <button class="btn btn-default col-xs-3 number" type="button" data-val=".">.</button>
+        <button class="btn btn-default col-xs-3 equals" data-val="equals" type="button">=</button>
+      </div>
+
 
     </form>
+
+    </div>
     <div id="result"></div>
   </body>
 </html>
